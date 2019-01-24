@@ -11,4 +11,4 @@
 <     54526 o
 <     54501 h
 ---
-> Child process (30379) exited due to signal (Floating point exception).
+> Child process (25044) exited due to signal (Segmentation fault).

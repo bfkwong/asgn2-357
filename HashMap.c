@@ -52,7 +52,7 @@ HashMap *rehash(HashMap *dictionary) {
    HashMap *newMap;
    int i;
 
-   newMap = initHashMap((dictionary->fullSize) ^ 2);
+   newMap = initHashMap((dictionary->fullSize) <<= 2);
 
    for(i=0; i<(dictionary->fullSize); i++) {
       if (dictionary->array[i] != NULL) {
@@ -82,7 +82,7 @@ HashMap *insert(HashMap *dictionary, char *key, int val){
    char *cpyKey;
    double loadFactor;
    int pos;
-   HashNode *temp;
+   HashNode *currentLocation;
    HashNode *newNode;
    HashNode *list;
 
@@ -103,15 +103,16 @@ HashMap *insert(HashMap *dictionary, char *key, int val){
       exit(EXIT_FAILURE);
    }
 
-   temp = list;
-   while(temp != NULL){
-      if(strcmp(temp->key, cpyKey) == 0){
-         temp->value = temp->value + 1;
+   currentLocation = list;
+   while(currentLocation != NULL){
+      if(strcmp(currentLocation->key, cpyKey) == 0){
+         currentLocation->value = currentLocation->value + 1;
          free(cpyKey);
          free(newNode);
          return dictionary;
       }
-      temp = temp->next;
+      currentLocation = dictionary->array[pos+=1];
+      // temp = temp->next;
    }
    dictionary->numItems += 1;
    newNode->key = cpyKey;
@@ -146,7 +147,7 @@ HashNode **hashmapToArray(HashMap *dictionary) {
    for(i=0; i<(dictionary->fullSize); i++) {
       if (dictionary->array[i] != NULL) {
          nodeMap[arrayCounter] = dictionary->array[i];
-         arrayCounter++;
+         arrayCounter += 1;
       }
    }
    return nodeMap;
@@ -171,3 +172,4 @@ void freeHashArray(HashNode **array, int numOfItems) {
 
    free(array);
 }
+
