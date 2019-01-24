@@ -21,7 +21,7 @@ int main(int argc, char **argv) {
    int argCounter;
    int i, j;
 
-   wordMap = initHashMap(1000);
+   wordMap = initHashMap(10000);
    numOfWords = 10;
    argCounter = 0;
 

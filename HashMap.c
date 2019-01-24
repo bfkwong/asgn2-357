@@ -48,19 +48,19 @@ HashMap *initHashMap(int fullSize) {
    return dictionary;
 }
 
-HashMap *rehash(HashMap *dictionary) {
+HashMap *rehash(HashMap *dict) {
    HashMap *newMap;
    int i;
 
-   newMap = initHashMap((dictionary->fullSize) <<= 2);
+   newMap = initHashMap((dict->fullSize) << 2);
 
-   for(i=0; i<(dictionary->fullSize); i++) {
-      if (dictionary->array[i] != NULL) {
-         insert(newMap, dictionary->array[i]->key, dictionary->array[i]->value);
+   for(i=0; i<(dict->fullSize); i++) {
+      if (dict->array[i] != NULL) {
+         insert(newMap, dict->array[i]->key, dict->array[i]->value);
       }
    }
 
-   freeHashMap(dictionary);
+   freeHashMap(dict);
 
    return newMap;
 }
@@ -111,7 +111,9 @@ HashMap *insert(HashMap *dictionary, char *key, int val){
          free(newNode);
          return dictionary;
       }
-      currentLocation = dictionary->array[pos+=1];
+      currentLocation = (pos < dictionary->fullSize)?
+                         dictionary->array[pos+=1]:
+                         dictionary->array[0];
       // temp = temp->next;
    }
    dictionary->numItems += 1;
