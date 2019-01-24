@@ -21,7 +21,7 @@ int main(int argc, char **argv) {
    int argCounter;
    int i, j, cnt;
 
-   wordMap = initHashMap(2560000);
+   wordMap = initHashMap(2000000);
    numOfWords = 10;
    argCounter = 0;
    cnt = 0;
@@ -128,12 +128,8 @@ HashMap *addFileToMap(FILE *fileToProcess, HashMap *map) {
 
    if(strlen(currentWord) != 0) {
       map = insert(map, currentWord, 1);
-      free(currentWord);
-
-      wordLength = 100;
-      wordLocation = 0;
-      currentWord = (char *)calloc(wordLength, sizeof(char));
    }
+   free(currentWord);
 
    return map;
 

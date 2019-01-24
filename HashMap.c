@@ -90,6 +90,7 @@ HashMap *insert(HashMap *dictionary, char *key, int val){
 
    loadFactor = (double)(dictionary->numItems)/(double)(dictionary->fullSize);
    if (loadFactor >= 0.5) {
+      printHashMap(dictionary);
       dictionary = rehash(dictionary);
    }
 
