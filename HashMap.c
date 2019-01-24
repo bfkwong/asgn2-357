@@ -97,6 +97,7 @@ HashMap *insert(HashMap *dictionary, char *key, int val){
    list = dictionary->array[pos];
    newNode = (HashNode *)malloc(sizeof(HashNode));
 
+
    if(!newNode) {
       perror("insert");
       exit(EXIT_FAILURE);
@@ -110,16 +111,17 @@ HashMap *insert(HashMap *dictionary, char *key, int val){
          free(newNode);
          return dictionary;
       }
-      currentLocation = (pos < dictionary->fullSize)?
+      currentLocation = (pos < (dictionary->fullSize))?
                          dictionary->array[pos+=1]:
                          dictionary->array[0];
-      // temp = temp->next;
    }
+
    dictionary->numItems += 1;
    newNode->key = cpyKey;
    newNode->value = val;
    dictionary->array[pos] = newNode;
    return dictionary;
+
 }
 
 void printHashMap(HashMap *dictionary) {
@@ -144,7 +146,7 @@ HashNode **hashmapToArray(HashMap *dictionary) {
    int arrayCounter;
    arrayCounter = 0;
 
-   for(i=0; i<(dictionary->fullSize); i++) {
+   for(i=0; i<(dictionary->fullSize)+1; i++) {
       if (dictionary->array[i] != NULL) {
          nodeMap[arrayCounter] = dictionary->array[i];
          arrayCounter += 1;
