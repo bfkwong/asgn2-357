@@ -1,0 +1,14 @@
+1,11c1
+< The top 10 words (out of 31138) are:
+<     55659 n
+<     55420 i
+<     55172 l
+<     55056 e
+<     54753 r
+<     54724 d
+<     54690 t
+<     54673 u
+<     54526 o
+<     54501 h
+---
+> Child process (30379) exited due to signal (Floating point exception).
