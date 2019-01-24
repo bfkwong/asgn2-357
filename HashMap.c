@@ -8,7 +8,6 @@ typedef struct HashMap HashMap;
 struct HashNode {
    char *key;
    int value;
-   HashNode *next;
 };
 
 struct HashMap {
@@ -86,7 +85,7 @@ HashMap *insert(HashMap *dictionary, char *key, int val){
    HashNode *newNode;
    HashNode *list;
 
-   cpyKey = (char *)malloc(sizeof(char)*strlen(key));
+   cpyKey = (char *)malloc(sizeof(char)*(strlen(key)+1));
    strcpy(cpyKey, key);
 
    loadFactor = (double)(dictionary->numItems)/(double)(dictionary->fullSize);
@@ -119,7 +118,6 @@ HashMap *insert(HashMap *dictionary, char *key, int val){
    dictionary->numItems += 1;
    newNode->key = cpyKey;
    newNode->value = val;
-   newNode->next = list;
    dictionary->array[pos] = newNode;
    return dictionary;
 }

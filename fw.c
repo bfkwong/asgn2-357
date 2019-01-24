@@ -19,11 +19,12 @@ int main(int argc, char **argv) {
    HashMap *wordMap;
    HashNode **nodeMap;
    int argCounter;
-   int i, j;
+   int i, j, cnt;
 
-   wordMap = initHashMap(10000);
+   wordMap = initHashMap(5000);
    numOfWords = 10;
    argCounter = 0;
+   cnt = 0;
 
    while(argCounter < (argc-1)) {
       argCounter += 1;
@@ -42,6 +43,7 @@ int main(int argc, char **argv) {
 
          FILE *fileToProcess;
          fileToProcess = fopen(argv[argCounter], "r");
+         cnt += 1;
 
          if(!fileToProcess) {
             perror(argv[argCounter]);
@@ -50,8 +52,11 @@ int main(int argc, char **argv) {
             wordMap = addFileToMap(fileToProcess, wordMap);
             fclose(fileToProcess);
          }
-
       }
+   }
+
+   if (cnt == 0) {
+      wordMap = addFileToMap(stdin, wordMap);
    }
 
    printf("The top %d words (out of %d) are:\n", numOfWords, wordMap->numItems);
